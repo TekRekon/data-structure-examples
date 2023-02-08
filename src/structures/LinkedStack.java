@@ -15,7 +15,7 @@ public class LinkedStack<T> {
     }
 
     //time complexity: O(1)
-    //space complexity: O(1)
+    //Add a node to the head of the stack (before the first node)
     public void push(T elem) {
         Node<T> pushedNode = first;
         first = new Node<T>();
@@ -25,14 +25,14 @@ public class LinkedStack<T> {
     }
 
     //time complexity: O(1)
-    //space complexity: O(1)
     //Remove the first node and return its item
     public T pop() {
         if (isEmpty()) { return null; }
         Node<T> newFirst = first.next;
-        T poppedNode = first.item;
+        T poppedItem = first.item;
         first = newFirst;
-        return poppedNode;
+        length--;
+        return poppedItem;
     }
 
     //Return the item of the first node without removing it

@@ -16,12 +16,11 @@ public class ArrayQueue<T> {
     }
 
     //Time-complexity: O(n)
-    //Space-complexity: O(n)
     //Double the size of the array used to store the queue
     private void resize(int newSize) {
         T[] resizedQueue = (T[]) new Object[newSize];
         int index = 0;
-        do {                               //head=tail initially, so do once before checking for head=tail
+        do {                               //head==tail initially, so do once before checking for head==tail
             if (head>=maxSize) {
                 head=0; //Reset head to account for wrapped elements
                 continue;
@@ -38,7 +37,6 @@ public class ArrayQueue<T> {
     }
 
     //Time-complexity: O(1)
-    //Space-complexity: O(1)
     //If resize is called, then the time and space complexity is O(n)
     //Adds elem to the queue at q[tail]
     public void enqueue(T elem) {
@@ -50,7 +48,7 @@ public class ArrayQueue<T> {
     }
 
     //Time-complexity: O(1)
-    //Space-complexity: O(1)
+    //If resize is called, then the time complexity is O(n)
     //Remove elem at q[head] and return it
     public T dequeue() {
         if (isEmpty()) { return null; }
@@ -58,10 +56,11 @@ public class ArrayQueue<T> {
         q[head] = null;
         head++;
         length--;
+        if (length<=maxSize/4) { resize(maxSize/2); }
         return dequeuedElem;
     }
 
-    //Return elem at q[head] without returning it
+    //Return elem at q[head] without removing it
     public T peek() {
         if (isEmpty()) { return null; }
         return q[head];

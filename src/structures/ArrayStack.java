@@ -1,7 +1,7 @@
 package structures;
 
 public class ArrayStack<T> {
-    private int nextEmptyIndex; //Index of the next available slot in the array
+    private int nextEmptyIndex; //Index of the next available slot in the array, can also be thought of as length
     private int maxSize;
     private T[] stack;
 
@@ -12,25 +12,25 @@ public class ArrayStack<T> {
     }
 
     //time complexity: O(n)
-    //space complexity: O(n)
-    //Double the size of the array used to store the stack
-    private void doubleSize() {
-        T[] biggerStack = (T[]) new Object[2*maxSize];
-        for (int i=0; i<maxSize; i++) {
-            biggerStack[i] = stack[i];
+    //Resize the array used to store the stack to length newSize
+    private void resize(int newSize) {
+        T[] resizedStack = (T[]) new Object[newSize];
+        for (int i=0; i<newSize; i++) {
+            resizedStack[i] = stack[i];
         }
-        maxSize *= 2;
-        stack = biggerStack;
+        maxSize = newSize;
+        stack = resizedStack;
     }
 
     //time complexity: O(1)
-    //space complexity: O(1)
+    //If halfSize() is called, the time complexity is O(n)
     //Remove the top element from the stack and return it
     public T pop() {
         if (isEmpty()) { return null; }
         T poppedElem = stack[nextEmptyIndex-1];
         stack[nextEmptyIndex -1] = null;
         nextEmptyIndex -= 1;
+        if (nextEmptyIndex <= maxSize/4) { resize(maxSize/2); }
         return poppedElem;
     }
 
@@ -41,11 +41,10 @@ public class ArrayStack<T> {
     }
 
     //time complexity: O(1)
-    //space complexity: O(1)
-    //If doubleSize() is called, the time and space complexity is O(n)
+    //If doubleSize() is called, the time complexity is O(n)
     //Add an element to the top of the stack
     public void push(T elem) {
-        if (nextEmptyIndex >= maxSize) { doubleSize(); }
+        if (nextEmptyIndex >= maxSize) { resize(2*maxSize); }
         stack[nextEmptyIndex] = elem;
         nextEmptyIndex++;
     }
