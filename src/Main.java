@@ -13,7 +13,15 @@ public class Main {
                 testArrayQueue();
             case 3:
                 testLinkedStack();
+            case 4:
+                testLinkedQueue();
         }
+    }
+
+    public static void testLinkedQueue() {
+        LinkedQueue<String> q = new LinkedQueue<String>();
+        //Write some code here to test your LinkedQueue
+
     }
 
     public static void testLinkedStack() {
