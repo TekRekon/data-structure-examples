@@ -3,19 +3,31 @@ import structures.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Type to test: 1-ArrayStack, 2-ArrayQueue, 3-LinkedStack");
+        System.out.println("Type to test: 1-ArrayStack, 2-ArrayQueue, 3-LinkedStack, 4-LinkedQueue, 5-QuickFind");
         Scanner f = new Scanner(System.in);
         int choice = f.nextInt();
         switch (choice) {
             case 1:
                 testArrayStack();
+                break;
             case 2:
                 testArrayQueue();
+                break;
             case 3:
                 testLinkedStack();
+                break;
             case 4:
                 testLinkedQueue();
+                break;
+            case 5:
+                testQuickFind();
+                break;
         }
+    }
+
+    private static void testQuickFind() {
+        QuickFind x = new QuickFind(5);
+        //Write some code here to test QuickFind
     }
 
     public static void testLinkedQueue() {
